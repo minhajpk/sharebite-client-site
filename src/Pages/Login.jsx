@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../Context/AuthContext";
 
 const Login = () => {
-    const {signInWithGoogle} = use(AuthContext);
+    const {signInWithGoogle, signIn} = use(AuthContext);
     const navigate = useNavigate();
     const {
         register,
@@ -16,7 +16,21 @@ const Login = () => {
 
     const onSubmit = (data) => {
         console.log("Login Data:", data);
-        // Add your login logic here
+        signIn(data.email, data.password)
+        .then(result =>{
+            console.log(result.user);
+                 Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Logged in successfully with Google",
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                    navigate('/');
+        })
+        .catch(error =>{
+            console.log(error);
+        });
     };
     const handleGoogleSignIn = ()=>{
             signInWithGoogle()

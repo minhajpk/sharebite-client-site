@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { use } from 'react';
 import Logo from '../assets/Sharebite Logo.png'
 import { Link } from 'react-router';
+import { AuthContext } from '../Context/AuthContext';
+import Icon from '../assets/user.png'
 
 const Navber = () => {
+    const { user, logOut } = use(AuthContext)
     const links = <>
-    <Link to="/">Home</Link>
-    <li>All Donations</li>
-    <Link to="/dashboard">Dashboard</Link>
+        <Link to="/">Home</Link>
+        <li>All Donations</li>
+        <Link to="/dashboard">Dashboard</Link>
     </>
+    const handleLogOut = () => {
+        logOut();
+    }
     return (
         <div className="bg-base-200 shadow-md">
             {/* Drawer Wrapper */}
@@ -49,10 +55,32 @@ const Navber = () => {
                         </div>
 
                         {/* End */}
-                        <div className="navbar-end space-x-4 hidden lg:flex">
-                            <Link to="/login"><button className='btn border border-green-700 bg-white'>Login</button></Link>
-                            <Link to="/register"><button className='btn  border border-green-700 bg-white'>Register</button></Link>
-                        </div>
+                        <div className="navbar-end space-x-4  lg:flex">
+                            {
+                                user ? (
+                                    <div className="dropdown dropdown-end">
+                                        <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                                            <div className="w-10 rounded-full">
+                                                <img src={user?.photoURL
+                                                    || Icon} alt="User" />
+                                            </div>
+                                        </div>
+                                        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-28">
+
+                                            <li>
+                                                <button onClick={handleLogOut} className="text-green-800 font-bold">Signout</button>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                ) : (
+                                    <div className='space-x-3 hidden lg:glock lg:flex'>
+                                        <Link to="/login" className="btn bg-white text-[#0e606e] hover:bg-[#0e606e] hover:text-white">Login</Link>
+                                        <Link to="/register" className="btn bg-white text-[#0e606e] hover:bg-[#0e606e] hover:text-white">Sign Up</Link>
+                                    </div>
+
+                                )
+                            }            </div>
 
                     </div>
                 </div>
@@ -62,7 +90,7 @@ const Navber = () => {
                     <label htmlFor="nav-drawer" className="drawer-overlay"></label>
                     <ul className="menu p-4 space-x-4 w-64 min-h-full bg-base-200 text-base-content">
                         {/* Sidebar content here */}
-                      {links}
+                        {links}
                         <li>Register</li>
                         <li>Login</li>
                     </ul>
