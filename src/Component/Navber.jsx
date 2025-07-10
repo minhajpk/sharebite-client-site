@@ -4,12 +4,12 @@ import { Link } from 'react-router';
 
 const Navber = () => {
     const links = <>
-    <li>Home</li>
+    <Link to="/">Home</Link>
     <li>All Donations</li>
     <Link to="/dashboard">Dashboard</Link>
     </>
     return (
-        <div className="bg-base-100 shadow-sm">
+        <div className="bg-base-200 shadow-md">
             {/* Drawer Wrapper */}
             <div className="drawer z-50">
                 <input id="nav-drawer" type="checkbox" className="drawer-toggle" />
