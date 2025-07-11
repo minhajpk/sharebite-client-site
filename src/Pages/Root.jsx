@@ -11,7 +11,7 @@ const Root = () => {
         duration: 1000, 
     });
     return (
-        <div>
+        <div className=''>
             <Navber></Navber>
             <Outlet></Outlet>
             <Footer></Footer>
