@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, Outlet } from 'react-router';
+import { NavLink, Outlet } from 'react-router'; 
 import LogoD from '../../assets/Sharebite Logo.png';
 import {
     HiOutlineHome,
@@ -9,6 +9,11 @@ import {
     HiOutlinePencilAlt,
     HiOutlineCurrencyDollar
 } from 'react-icons/hi';
+
+const navLinkClass = ({ isActive }) =>
+    isActive
+        ? "bg-[#0e606e] text-white px-3 py-2 rounded-md block font-bold"
+        : "text-gray-700 hover:bg-[#0e606e] hover:text-white px-3 py-2 rounded-md block font-bold ";
 
 const DashboardLayout = () => {
     return (
@@ -20,14 +25,10 @@ const DashboardLayout = () => {
                 <div className="navbar bg-base-300 w-full lg:hidden">
                     <div className="flex-none">
                         <label htmlFor="my-drawer-2" className="btn btn-square btn-ghost">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-6 w-6"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                                    d="M4 6h16M4 12h16M4 18h16" />
                             </svg>
                         </label>
                     </div>
@@ -44,37 +45,37 @@ const DashboardLayout = () => {
                 <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
                 <ul className="menu bg-base-300 w-80 p-4 text-base-content min-h-full space-y-1">
                     <div className="p-3 flex justify-start items-center mt-2">
-                        <img src={LogoD} />
-                        <a className=" text-xl font-bold">ShareBite</a>
+                        <img src={LogoD} className="w-10 h-10 mr-2" alt="Logo" />
+                        <span className="text-xl font-bold">ShareBite</span>
                     </div>
 
                     <li>
-                        <NavLink to="/">
+                        <NavLink to="/" className={navLinkClass}>
                             <HiOutlineHome className="inline mr-2 text-lg" /> Home
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/dashboard/my-profile">
+                        <NavLink to="/dashboard/my-profile" className={navLinkClass}>
                             <HiOutlineUser className="inline mr-2 text-lg" /> My Profile
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/dashboard/request-charity-role">
+                        <NavLink to="/dashboard/request-charity-role" className={navLinkClass}>
                             <HiOutlineClipboardList className="inline mr-2 text-lg" /> Request Charity Role
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/dashboard/favorite">
+                        <NavLink to="/dashboard/favorite" className={navLinkClass}>
                             <HiOutlineHeart className="inline mr-2 text-lg" /> Favorites
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/dashboard/my-reviews">
+                        <NavLink to="/dashboard/my-reviews" className={navLinkClass}>
                             <HiOutlinePencilAlt className="inline mr-2 text-lg" /> My Reviews
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/dashboard/transaction-history">
+                        <NavLink to="/dashboard/transaction-history" className={navLinkClass}>
                             <HiOutlineCurrencyDollar className="inline mr-2 text-lg" /> Transaction History
                         </NavLink>
                     </li>

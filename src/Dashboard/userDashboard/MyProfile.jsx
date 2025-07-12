@@ -17,7 +17,7 @@ const MyProfile = () => {
   }
 
   return (
-    <div className="max-w-lg mx-auto bg-white shadow-lg rounded-lg p-8 mt-10">
+    <div className="max-w-lg mx-auto bg-white shadow-lg rounded-lg p-8 mt-10 ">
       <div className="flex flex-col items-center text-center space-y-4">
         <img
           src={user.photoURL || "https://i.ibb.co/4pDNDk1/avatar.png"}
@@ -42,3 +42,4 @@ const MyProfile = () => {
 };
 
 export default MyProfile;
+

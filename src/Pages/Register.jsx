@@ -1,13 +1,15 @@
-import React, { use } from "react";
+import React, { use, useState } from "react";
 import { useForm } from "react-hook-form";
 import log from "../assets/Untitled design.png";
 import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const Register = () => {
-    const { createUser, signInWithGoogle} = use(AuthContext)
-    const navigate = useNavigate()
+    const { createUser, signInWithGoogle, updateUserProfile } = use(AuthContext)
+    const navigate = useNavigate();
+    const [userprofile, setUserProfile] = useState();
     const {
         register,
         handleSubmit,
@@ -16,25 +18,40 @@ const Register = () => {
 
     const onSubmit = (data) => {
         console.log("Register Data:", data);
-            createUser(data.email, data.password)
-            .then(result => {
+        createUser(data.email, data.password)
+            .then((result) => {
                 console.log(result.user);
-                Swal.fire({
-                    position: "center",
-                    icon: "success",
-                    title: "Account created successfully!",
-                    showConfirmButton: false,
-                    timer: 2000
-                });
-                navigate('/');
+
+                const Profile = {
+                    displayName: data.name,
+                    photoURL: userprofile, 
+                };
+
+                updateUserProfile(Profile)
+                    .then(() => {
+                        console.log("Profile updated");
+
+                        Swal.fire({
+                            position: "center",
+                            icon: "success",
+                            title: "Account created successfully!",
+                            showConfirmButton: false,
+                            timer: 2000,
+                        });
+
+                        navigate('/');
+                    })
+                    .catch((error) => {
+                        console.error("Profile update failed:", error);
+                    });
             })
-            .catch(error => {
-                console.error(error);
+            .catch((error) => {
+                console.error("User creation failed:", error);
             });
     };
-    const handleGoogleSignIn = ()=>{
+    const handleGoogleSignIn = () => {
         signInWithGoogle()
-        .then(result => {
+            .then(result => {
                 console.log(result.user);
                 Swal.fire({
                     position: "center",
@@ -49,6 +66,34 @@ const Register = () => {
                 console.error(error);
             });
     }
+    const handleImageUpload = async (e) => {
+        const file = e.target.files[0];
+        console.log(file);
+
+        const formData = new FormData();
+        formData.append('image', file);
+
+        try {
+            const res = await axios.post(
+                `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbb_api_key}`,
+                formData
+            );
+
+            if (res.data.success) {
+                const imageUrl = res.data.data.display_url;
+                setUserProfile(imageUrl);
+                console.log("Uploaded Image URL:", imageUrl);
+                // You can now save imageUrl to your database if needed
+            } else {
+                console.error("Image upload failed:", res.data);
+            }
+        } catch (error) {
+            console.error("Upload error:", error);
+        }
+    };
+
+
+
 
     return (
         <div className="min-h-screen   flex items-center justify-center gap-5 px-4">
@@ -85,9 +130,9 @@ const Register = () => {
                                 <input
                                     id="profileImage"
                                     type="file"
-                                    accept="image/*"
+                                    onChange={handleImageUpload}
                                     className="file-input file-input-bordered w-full"
-                                    {...register("profileImage", { required: "Profile image is required" })}
+
                                 />
                                 {errors.profileImage && (
                                     <p className="text-red-500 text-sm mt-1">{errors.profileImage.message}</p>

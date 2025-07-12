@@ -1,9 +1,12 @@
-import React, { use, useState } from "react";
+import React, { use } from "react";
 import { useForm } from "react-hook-form";
 import log from "../assets/Untitled design.png";
 import { Link, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import { AuthContext } from "../Context/AuthContext";
+import {
+    HiOutlineHome
+} from 'react-icons/hi';
 
 const Login = () => {
     const {signInWithGoogle, signIn} = use(AuthContext);
