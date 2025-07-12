@@ -5,11 +5,14 @@ import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
 import Swal from "sweetalert2";
 import axios from "axios";
+import useAxios from "../Hooks/axiosInstance";
 
 const Register = () => {
     const { createUser, signInWithGoogle, updateUserProfile } = use(AuthContext)
     const navigate = useNavigate();
     const [userprofile, setUserProfile] = useState();
+    const axiosInstance = useAxios();
+
     const {
         register,
         handleSubmit,
@@ -19,12 +22,24 @@ const Register = () => {
     const onSubmit = (data) => {
         console.log("Register Data:", data);
         createUser(data.email, data.password)
-            .then((result) => {
+            .then(async (result) => {
                 console.log(result.user);
+
+                // user info 
+                const userInfo = {
+                    email: data.email,
+                    name: data.name,
+                    role: 'user',
+                    photoURL: userprofile,
+                    created_at: new Date().toISOString()
+
+                }
+                const userRes = await axiosInstance.post('/users', userInfo);
+                console.log(userRes.data);
 
                 const Profile = {
                     displayName: data.name,
-                    photoURL: userprofile, 
+                    photoURL: userprofile,
                 };
 
                 updateUserProfile(Profile)
