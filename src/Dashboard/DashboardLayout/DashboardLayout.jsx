@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, Outlet } from 'react-router'; 
+import { NavLink, Outlet } from 'react-router';
 import LogoD from '../../assets/Sharebite Logo.png';
 import {
     HiOutlineHome,
@@ -9,6 +9,7 @@ import {
     HiOutlinePencilAlt,
     HiOutlineCurrencyDollar
 } from 'react-icons/hi';
+import { FaClipboardList, FaHandsHelping, FaStar, FaUserCheck, FaUsersCog } from 'react-icons/fa';
 
 const navLinkClass = ({ isActive }) =>
     isActive
@@ -51,7 +52,7 @@ const DashboardLayout = () => {
 
                     <li>
                         <NavLink to="/" className={navLinkClass}>
-                            <HiOutlineHome className="inline mr-2 text-lg" /> Home
+                            <HiOutlineHome className="inline mr-2 text-lg" /> Dashboard Home
                         </NavLink>
                     </li>
                     <li>
@@ -79,6 +80,31 @@ const DashboardLayout = () => {
                             <HiOutlineCurrencyDollar className="inline mr-2 text-lg" /> Transaction History
                         </NavLink>
                     </li>
+                    <li>
+                        <NavLink to="/dashboard/admin-profile" className={navLinkClass}>
+                            <HiOutlineUser className="inline mr-2 text-lg" /> Admin Profile
+                        </NavLink>
+                    </li>
+                    <NavLink to="/dashboard/manage-user" className={navLinkClass}>
+                        <FaUsersCog className="inline mr-2 text-lg" /> Manage Users
+                    </NavLink>
+
+                    <NavLink to="/dashboard/manage-donations" className={navLinkClass}>
+                        <FaHandsHelping className="inline mr-2 text-lg" /> Manage Donations
+                    </NavLink>
+
+                    <NavLink to="/dashboard/manage-role-requests" className={navLinkClass}>
+                        <FaUserCheck className="inline mr-2 text-lg" /> Manage Role Requests
+                    </NavLink>
+
+                    <NavLink to="/dashboard/manage-requests" className={navLinkClass}>
+                        <FaClipboardList className="inline mr-2 text-lg" /> Manage Requests
+                    </NavLink>
+
+                    <NavLink to="/dashboard/feature-donations" className={navLinkClass}>
+                        <FaStar className="inline mr-2 text-lg" /> Feature Donations
+                    </NavLink>
+                    
                 </ul>
             </div>
         </div>

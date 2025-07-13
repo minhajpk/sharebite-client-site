@@ -10,6 +10,7 @@ import {
 
 const Login = () => {
     const {signInWithGoogle, signIn} = use(AuthContext);
+    const from = location.state?.from || '/'
     const navigate = useNavigate();
     const {
         register,
@@ -46,7 +47,7 @@ const Login = () => {
                         showConfirmButton: false,
                         timer: 2000
                     });
-                    navigate('/');
+                    navigate(from);
                 })
                 .catch(error => {
                     console.error(error);

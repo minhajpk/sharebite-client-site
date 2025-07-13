@@ -18,7 +18,7 @@ const Navber = () => {
                 </NavLink>
             </li>
             <li>
-                <NavLink to="/" className={({ isActive }) => isActive ? "bg-[#0e606e] text-white font-bold text-xl rounded flex items-center space-x-2" : "hover:bg-gray-100 font-bold text-xl rounded text-[#0e606e] flex items-center space-x-2"}>
+                <NavLink to="/all-donation" className={({ isActive }) => isActive ? "bg-[#0e606e] text-white font-bold text-xl rounded flex items-center space-x-2" : "hover:bg-gray-100 font-bold text-xl rounded text-[#0e606e] flex items-center space-x-2"}>
                     <FaGift />  <span> All Donation</span>
                 </NavLink>
             </li>

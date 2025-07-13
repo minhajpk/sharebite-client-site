@@ -12,6 +12,7 @@ const Register = () => {
     const navigate = useNavigate();
     const [userprofile, setUserProfile] = useState();
     const axiosInstance = useAxios();
+    const from = location.state?.from || '/'
 
     const {
         register,
@@ -75,7 +76,7 @@ const Register = () => {
                     showConfirmButton: false,
                     timer: 2000
                 });
-                navigate('/');
+                navigate(from);
             })
             .catch(error => {
                 console.error(error);
