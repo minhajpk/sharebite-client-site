@@ -21,6 +21,7 @@ import RestaurantRoute from "./RestaurantRoute";
 import RestaurantProfile from "../Dashboard/RestrurentDashboard/RestaurantProfile";
 import AddDonation from "../Dashboard/RestrurentDashboard/AddDonation";
 import MyDonations from "../Dashboard/RestrurentDashboard/MyDonation";
+import DonationDetails from "../Dashboard/RestrurentDashboard/DonationDetails";
 
 
 
@@ -45,6 +46,10 @@ export const router = createBrowserRouter([
                 path: "/all-donation",
                 element: <PrivateRoute><AllDonationPage></AllDonationPage></PrivateRoute>
 
+            },
+             {
+                path: '/donation-details/:id', // ✅ এটা সঠিক (relative path)
+                element: <DonationDetails />
             }
         ]
     },
@@ -64,10 +69,10 @@ export const router = createBrowserRouter([
                 path: "my-profile",
                 Component: MyProfile
             },
-           {
-            path:"transaction-history",
-            Component:TransactionHistory
-           },
+            {
+                path: "transaction-history",
+                Component: TransactionHistory
+            },
             {
                 path: 'manage-user',
                 element: <AdminRoute><ManagerUser></ManagerUser></AdminRoute>
@@ -78,8 +83,8 @@ export const router = createBrowserRouter([
                 element: <AdminRoute><AdminProfile></AdminProfile></AdminRoute>
             },
             {
-                path:'manage-role-requests',
-                element:<AdminRoute><ManageRoleRequests></ManageRoleRequests></AdminRoute>
+                path: 'manage-role-requests',
+                element: <AdminRoute><ManageRoleRequests></ManageRoleRequests></AdminRoute>
             },
 
             // Restaurant Dashboard
@@ -94,7 +99,8 @@ export const router = createBrowserRouter([
             {
                 path: 'my-donations',
                 Component: MyDonations
-            }
+            },
+           
 
         ]
     }

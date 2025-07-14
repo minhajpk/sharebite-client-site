@@ -18,13 +18,13 @@ const Banner = () => {
                 showArrows={true}
             >
                 <div >
-                    <img src={BannerImage1} className='rounded-2xl' alt="Banner 1" />
+                    <img src={BannerImage1} className='lg:rounded-2xl' alt="Banner 1" />
                 </div>
                 <div>
-                    <img src={BannerImage2} className='rounded-2xl' alt="Banner 2" />
+                    <img src={BannerImage2} className='lg:rounded-2xl' alt="Banner 2" />
                 </div>
                 <div>
-                    <img src={BannerImage3} className='rounded-2xl' alt="Banner 3" />
+                    <img src={BannerImage3} className='lg:rounded-2xl' alt="Banner 3" />
                 </div>
               
                 

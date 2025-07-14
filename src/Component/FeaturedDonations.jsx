@@ -4,13 +4,13 @@ import { Link } from 'react-router';
 import useAxiosSecure from '../Hooks/axiosSecure';
 
 
-const AllDonationPage = () => {
+const FeaturedDonations = () => {
   const axiosSecure = useAxiosSecure();
 
   const { data: donations = [], isLoading } = useQuery({
     queryKey: ['featured-donations'],
     queryFn: async () => {
-      const res = await axiosSecure.get('/donations/all-donation');
+      const res = await axiosSecure.get('/donations/featured');
       return res.data;
     },
   });
@@ -19,7 +19,7 @@ const AllDonationPage = () => {
 
   return (
     <div className="max-w-7xl mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-6">All Donations</h2>
+      <h2 className="text-2xl font-bold mb-6">Featured Donations</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {donations.map((donation) => (
           <div key={donation._id} className="card bg-base-100 w-96 shadow-sm">
@@ -55,7 +55,7 @@ const AllDonationPage = () => {
               </p>
               <div className=" mt-2">
               
-                <Link to={`all-donation/donation-details/${donation._id}`}>
+                <Link to={`donation-details/${donation._id}`}>
                   <button type="submit" className="btn bg-[#0e606e] w-full text-white hover:scale-105 transition duration-300 hover:bg-[#0e606e]">
                                 Details
                             </button>
@@ -69,4 +69,4 @@ const AllDonationPage = () => {
   );
 };
 
-export default AllDonationPage;
+export default FeaturedDonations;
