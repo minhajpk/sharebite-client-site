@@ -16,6 +16,11 @@ import AdminProfile from "../Dashboard/AdminDashboard.jsx/AdminProfile";
 import AdminRoute from "./AdminRoute";
 import Payment from "../Dashboard/userDashboard/PaymentStripe/Payment";
 import TransactionHistory from "../Dashboard/userDashboard/TransactionHistory";
+import ManageRoleRequests from "../Dashboard/AdminDashboard.jsx/ManageRoleRequests";
+import RestaurantRoute from "./RestaurantRoute";
+import RestaurantProfile from "../Dashboard/RestrurentDashboard/RestaurantProfile";
+import AddDonation from "../Dashboard/RestrurentDashboard/AddDonation";
+import MyDonations from "../Dashboard/RestrurentDashboard/MyDonation";
 
 
 
@@ -71,6 +76,24 @@ export const router = createBrowserRouter([
             {
                 path: 'admin-profile',
                 element: <AdminRoute><AdminProfile></AdminProfile></AdminRoute>
+            },
+            {
+                path:'manage-role-requests',
+                element:<AdminRoute><ManageRoleRequests></ManageRoleRequests></AdminRoute>
+            },
+
+            // Restaurant Dashboard
+            {
+                path: 'restaurant-profile',
+                Component: RestaurantProfile
+            },
+            {
+                path: 'add-donation',
+                Component: AddDonation
+            },
+            {
+                path: 'my-donations',
+                Component: MyDonations
             }
 
         ]

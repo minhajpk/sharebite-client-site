@@ -9,7 +9,8 @@ import {
     HiOutlinePencilAlt,
     HiOutlineCurrencyDollar
 } from 'react-icons/hi';
-import { FaClipboardList, FaHandsHelping, FaStar, FaUserCheck, FaUsersCog } from 'react-icons/fa';
+import { FaClipboardList, FaHandsHelping, FaListAlt, FaPlus, FaRegHandshake, FaStar, FaUserCheck, FaUsersCog, FaUtensils } from 'react-icons/fa';
+import useUserRole from '../../Hooks/useUserRole';
 
 const navLinkClass = ({ isActive }) =>
     isActive
@@ -17,6 +18,8 @@ const navLinkClass = ({ isActive }) =>
         : "text-gray-700 hover:bg-[#0e606e] hover:text-white px-3 py-2 rounded-md block font-bold ";
 
 const DashboardLayout = () => {
+    const { role, roleLoading } = useUserRole();
+    console.log(role);
     return (
         <div className="drawer lg:drawer-open min-h-screen">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -80,31 +83,62 @@ const DashboardLayout = () => {
                             <HiOutlineCurrencyDollar className="inline mr-2 text-lg" /> Transaction History
                         </NavLink>
                     </li>
-                    <li>
-                        <NavLink to="/dashboard/admin-profile" className={navLinkClass}>
-                            <HiOutlineUser className="inline mr-2 text-lg" /> Admin Profile
-                        </NavLink>
-                    </li>
-                    <NavLink to="/dashboard/manage-user" className={navLinkClass}>
-                        <FaUsersCog className="inline mr-2 text-lg" /> Manage Users
-                    </NavLink>
+                    {/* Admin dashboard */}
+                    {!roleLoading && role === 'admin' &&
+                        <>
+                            <li>
+                                <NavLink to="/dashboard/admin-profile" className={navLinkClass}>
+                                    <HiOutlineUser className="inline mr-2 text-lg" /> Admin Profile
+                                </NavLink>
+                            </li>
+                            <NavLink to="/dashboard/manage-user" className={navLinkClass}>
+                                <FaUsersCog className="inline mr-2 text-lg" /> Manage Users
+                            </NavLink>
 
-                    <NavLink to="/dashboard/manage-donations" className={navLinkClass}>
-                        <FaHandsHelping className="inline mr-2 text-lg" /> Manage Donations
-                    </NavLink>
+                            <NavLink to="/dashboard/manage-donations" className={navLinkClass}>
+                                <FaHandsHelping className="inline mr-2 text-lg" /> Manage Donations
+                            </NavLink>
 
-                    <NavLink to="/dashboard/manage-role-requests" className={navLinkClass}>
-                        <FaUserCheck className="inline mr-2 text-lg" /> Manage Role Requests
-                    </NavLink>
+                            <NavLink to="/dashboard/manage-role-requests" className={navLinkClass}>
+                                <FaUserCheck className="inline mr-2 text-lg" /> Manage Role Requests
+                            </NavLink>
 
-                    <NavLink to="/dashboard/manage-requests" className={navLinkClass}>
-                        <FaClipboardList className="inline mr-2 text-lg" /> Manage Requests
-                    </NavLink>
+                            <NavLink to="/dashboard/manage-requests" className={navLinkClass}>
+                                <FaClipboardList className="inline mr-2 text-lg" /> Manage Requests
+                            </NavLink>
 
-                    <NavLink to="/dashboard/feature-donations" className={navLinkClass}>
-                        <FaStar className="inline mr-2 text-lg" /> Feature Donations
-                    </NavLink>
-                    
+                            <NavLink to="/dashboard/feature-donations" className={navLinkClass}>
+                                <FaStar className="inline mr-2 text-lg" /> Feature Donations
+                            </NavLink>
+                        </>
+                    }
+                    {!roleLoading && role === 'restaurant' &&
+                        <>
+                            <div className="space-y-2">
+                                <NavLink to="/dashboard/restaurant-profile" className={navLinkClass}>
+                                    <FaUtensils className="inline mr-2 text-lg" />
+                                    Restaurant Profile
+                                </NavLink>
+
+                                <NavLink to="/dashboard/add-donation" className={navLinkClass}>
+                                    <FaPlus className="inline mr-2 text-lg" />
+                                    Add Donation
+                                </NavLink>
+
+                                <NavLink to="/dashboard/my-donations" className={navLinkClass}>
+                                    <FaListAlt className="inline mr-2 text-lg" />
+                                    My Donations
+                                </NavLink>
+
+                                <NavLink to="/dashboard/requested-donations" className={navLinkClass}>
+                                    <FaRegHandshake className="inline mr-2 text-lg" />
+                                    Requested Donations
+                                </NavLink>
+                            </div>
+
+                        </>
+
+                    }
                 </ul>
             </div>
         </div>
