@@ -16,6 +16,9 @@ const RequestModal = ({ donation, user, closeModal }) => {
                 donationId: donation._id,
                 donationImage: donation.image,
                 donationTitle: donation.title,
+                location: donation.location,
+                type: donation.type,
+                quantity: donation.quantity,
                 restaurantName: donation.restaurantName,
                 requesterName: user.displayName,
                 requesterEmail: user.email,
@@ -58,6 +61,10 @@ const RequestModal = ({ donation, user, closeModal }) => {
                     <input type="text" value={donation.image} readOnly className="input input-bordered w-full" />
                     <input type="text" value={donation.title} readOnly className="input input-bordered w-full" />
                     <input type="text" value={donation.restaurantName} readOnly className="input input-bordered w-full" />
+                    <input type="text" value={donation.
+                        quantity} readOnly className="input input-bordered w-full" />
+                    <input type="text" value={donation.type} readOnly className="input input-bordered w-full" />
+                    <input type="text" value={donation.location} readOnly className="input input-bordered w-full" />
                     <input type="text" value={user.displayName} readOnly className="input input-bordered w-full" />
                     <input type="email" value={user.email} readOnly className="input input-bordered w-full" />
 

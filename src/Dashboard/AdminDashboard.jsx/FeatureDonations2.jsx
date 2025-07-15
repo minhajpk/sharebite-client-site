@@ -17,8 +17,10 @@ const FeaturedDonations2 = () => {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <div className="max-w-7xl mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-6">Featured Donations</h2>
+    <div className="max-w-7xl p-4">
+      <div><h2 className="text-2xl font-bold mb-6">Featured Donations</h2>
+      
+      </div>
 
       <div className="overflow-x-auto">
         <table className="table table-zebra max-w-7xl">
@@ -37,13 +39,13 @@ const FeaturedDonations2 = () => {
               <tr key={donation._id}>
                 <td className="font-semibold">{donation.title}</td>
                 <td>
-                  {donation.status === 'Available' && (
+                  {/* {donation.status === 'Available' && (
                     <span className="badge badge-secondary mr-2">NEW</span>
-                  )}
+                  )} */}
                   <span
                     className={`badge ${
                       donation.status === 'Available'
-                        ? 'badge-success'
+                        ? 'badge-success text-white font-bold'
                         : 'badge-warning'
                     }`}
                   >

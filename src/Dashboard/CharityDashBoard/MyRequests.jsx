@@ -55,12 +55,13 @@ const MyRequests = () => {
         <p className="col-span-full text-center text-gray-500">No requests found.</p>
       ) : (
         requests.map((req) => (
-          <div key={req._id} className="card bg-base-100 shadow-sm w-full">
+          <div key={req._id} className="card bg-base-100 shadow-sm w-96 ">
             <div className="card-body">
-                <img src={req.donationImage} alt="" />
+              <img src={req.donationImage} alt="" />
               <h2 className="card-title">{req.donationTitle}</h2>
               <p><strong>Restaurant:</strong> {req.restaurantName}</p>
-              <p><strong>Type:</strong> {req.foodType}</p>
+              <p><strong>Type:</strong> {req.
+                type}</p>
               <p><strong>Quantity:</strong> {req.quantity}</p>
               <p>
                 <strong>Status:</strong>{' '}

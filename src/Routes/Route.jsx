@@ -29,6 +29,12 @@ import MyReviews from "../Dashboard/userDashboard/MyReviews";
 import ManageRequests from "../Dashboard/AdminDashboard.jsx/ManageRequests";
 import FeaturedDonations2 from "../Dashboard/AdminDashboard.jsx/FeatureDonations2";
 import RequestedDonations from "../Dashboard/RestrurentDashboard/RequestedDonations";
+import Favorites from "../Dashboard/userDashboard/Favorites";
+import MyPickups from "../Dashboard/CharityDashBoard/MyPickups";
+import ReceivedDonations from "../Dashboard/CharityDashBoard/ReceivedDonations";
+import ErrorPage from "../Pages/Errorpage";
+import ForbiddenPage from "../Pages/ForbiddenPage";
+
 
 
 
@@ -36,6 +42,7 @@ export const router = createBrowserRouter([
     {
         path: "/",
         Component: Root,
+        errorElement: <ErrorPage/>,
         children: [
             {
                 index: true,
@@ -54,9 +61,13 @@ export const router = createBrowserRouter([
                 element: <PrivateRoute><AllDonationPage></AllDonationPage></PrivateRoute>
 
             },
-             {
-                path: '/donation-details/:id', 
+            {
+                path: '/donation-details/:id',
                 element: <PrivateRoute><DonationDetails /></PrivateRoute>
+            },
+            {
+                path:'/forbidden',
+                Component:ForbiddenPage
             }
         ]
     },
@@ -81,19 +92,24 @@ export const router = createBrowserRouter([
                 Component: TransactionHistory
             },
             {
-                path:"my-reviews",
+                path: "my-reviews",
                 Component: MyReviews
             },
             {
-                path: 'manage-user',
-                element: <AdminRoute><ManagerUser></ManagerUser></AdminRoute>
+                path: 'favorite',
+                Component: Favorites
             },
+
             // Admin dashboard route
             {
                 path: 'admin-profile',
                 element: <AdminRoute><AdminProfile></AdminProfile></AdminRoute>
             },
-            
+            {
+                path: 'manage-user',
+                element: <AdminRoute><ManagerUser></ManagerUser></AdminRoute>
+            },
+
             {
                 path: 'manage-role-requests',
                 element: <AdminRoute><ManageRoleRequests></ManageRoleRequests></AdminRoute>
@@ -103,11 +119,11 @@ export const router = createBrowserRouter([
                 element: <AdminRoute><ManageDonations></ManageDonations></AdminRoute>
             },
             {
-                path:'manage-requests',
+                path: 'manage-requests',
                 Component: ManageRequests
             },
             {
-                path:'feature-donations',
+                path: 'feature-donations',
                 Component: FeaturedDonations2
             },
 
@@ -125,20 +141,28 @@ export const router = createBrowserRouter([
                 Component: MyDonations
             },
             {
-                path:'requested-donations',
+                path: 'requested-donations',
                 Component: RequestedDonations
 
             },
 
             // Charity Dashboard
-           {
-            path:'charity-profile',
-            Component: CharityProfile
-           },
-           {
-            path:'my-requests',
-            Component: MyRequests
-           }
+            {
+                path: 'charity-profile',
+                Component: CharityProfile
+            },
+            {
+                path: 'my-requests',
+                Component: MyRequests
+            },
+            {
+                path:'my-pickups',
+                Component: MyPickups
+            },
+            {
+                path:'received-donations',
+                Component: ReceivedDonations
+            }
 
         ]
     }

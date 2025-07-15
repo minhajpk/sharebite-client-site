@@ -27,17 +27,16 @@ const Footer = () => {
         <div className="lg:text-center">
           <h4 className="text-lg font-semibold mb-4">Quick links</h4>
           <ul className="space-y-2 text-sm">
+            <li><a href="#" className="hover:text-yellow-500">Home</a></li>
+            <li><a href="#" className="hover:text-yellow-500">All Donations</a></li>
+            <li><a href="#" className="hover:text-yellow-500 ">Dashboard</a></li>
             <li><a href="#" className="hover:text-yellow-500">About Us</a></li>
-            <li><a href="#" className="hover:text-yellow-500">Causes</a></li>
-            <li><a href="#" className="hover:text-yellow-500 ">Recent Events</a></li>
-            <li><a href="#" className="hover:text-yellow-500">Our Team</a></li>
-            <li><a href="#" className="hover:text-yellow-500">Latest News</a></li>
           </ul>
         </div>
 
         {/* Contact Info */}
         <div>
-          <h4 className="text-lg font-semibold mb-4">Quick links</h4>
+          <h4 className="text-lg font-semibold mb-4">Contact Us</h4>
           <ul className="space-y-4 text-sm text-gray-600">
             <li className="flex items-center space-x-3">
               <FaPhone className="text-yellow-500" />

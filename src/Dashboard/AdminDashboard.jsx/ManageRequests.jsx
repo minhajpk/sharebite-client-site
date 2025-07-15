@@ -19,7 +19,7 @@ const ManageRequests = () => {
   // Delete request mutation
   const deleteMutation = useMutation({
     mutationFn: async (id) => {
-      return await axiosSecure.delete(`/requests_donations/${id}`);
+      return await axiosSecure.delete(`/request_donations/${id}`);
     },
     onSuccess: () => {
       queryClient.invalidateQueries(['requests']);
@@ -49,7 +49,7 @@ const ManageRequests = () => {
   if (isLoading) return <p className="text-center">Loading requests...</p>;
 
   return (
-    <div className="max-w-7xl mx-auto p-6">
+    <div className="max-w-7xl  p-6">
       <h2 className="text-2xl font-bold mb-4">Manage Requests</h2>
       {requests.length ? (
         <div className="overflow-x-auto">

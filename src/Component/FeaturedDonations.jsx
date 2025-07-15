@@ -19,7 +19,10 @@ const FeaturedDonations = () => {
 
   return (
     <div className="max-w-7xl mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-6">Featured Donations</h2>
+      <div className='mb-6 space-y-3'>
+        <h2 className="text-2xl text-center text-[#0e606e] font-bold ">Featured Donations</h2>
+      <p className='w-1/2 text-center mx-auto mb-3'>Handpicked donations from our generous partners, ready to feed communities and reduce food waste. View details, act fast, and support the cause.</p>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {donations.map((donation) => (
           <div key={donation._id} className="card bg-base-100 w-96 shadow-sm">
