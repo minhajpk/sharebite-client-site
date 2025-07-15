@@ -22,6 +22,9 @@ import RestaurantProfile from "../Dashboard/RestrurentDashboard/RestaurantProfil
 import AddDonation from "../Dashboard/RestrurentDashboard/AddDonation";
 import MyDonations from "../Dashboard/RestrurentDashboard/MyDonation";
 import DonationDetails from "../Dashboard/RestrurentDashboard/DonationDetails";
+import CharityProfile from "../Dashboard/CharityDashBoard/CharityProfile";
+import MyRequests from "../Dashboard/CharityDashBoard/MyRequests";
+import ManageDonations from "../Dashboard/AdminDashboard.jsx/ManageDonation";
 
 
 
@@ -48,8 +51,8 @@ export const router = createBrowserRouter([
 
             },
              {
-                path: '/donation-details/:id', // ✅ এটা সঠিক (relative path)
-                element: <DonationDetails />
+                path: '/donation-details/:id', 
+                element: <PrivateRoute><DonationDetails /></PrivateRoute>
             }
         ]
     },
@@ -82,9 +85,14 @@ export const router = createBrowserRouter([
                 path: 'admin-profile',
                 element: <AdminRoute><AdminProfile></AdminProfile></AdminRoute>
             },
+            
             {
                 path: 'manage-role-requests',
                 element: <AdminRoute><ManageRoleRequests></ManageRoleRequests></AdminRoute>
+            },
+            {
+                path: 'manage-donations',
+                element: <AdminRoute><ManageDonations></ManageDonations></AdminRoute>
             },
 
             // Restaurant Dashboard
@@ -100,7 +108,16 @@ export const router = createBrowserRouter([
                 path: 'my-donations',
                 Component: MyDonations
             },
-           
+
+            // Charity Dashboard
+           {
+            path:'charity-profile',
+            Component: CharityProfile
+           },
+           {
+            path:'my-requests',
+            Component: MyRequests
+           }
 
         ]
     }

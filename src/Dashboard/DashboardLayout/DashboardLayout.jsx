@@ -9,7 +9,7 @@ import {
     HiOutlinePencilAlt,
     HiOutlineCurrencyDollar
 } from 'react-icons/hi';
-import { FaClipboardList, FaHandsHelping, FaListAlt, FaPlus, FaRegHandshake, FaStar, FaUserCheck, FaUsersCog, FaUtensils } from 'react-icons/fa';
+import { FaBoxOpen, FaClipboardList, FaGift, FaHandsHelping, FaHistory, FaListAlt, FaPlus, FaRegHandshake, FaRegUser, FaStar, FaUserCheck, FaUsersCog, FaUtensils } from 'react-icons/fa';
 import useUserRole from '../../Hooks/useUserRole';
 
 const navLinkClass = ({ isActive }) =>
@@ -135,10 +135,36 @@ const DashboardLayout = () => {
                                     Requested Donations
                                 </NavLink>
                             </div>
-
                         </>
-
                     }
+                    {!roleLoading && role === 'charity' &&
+                    
+                      <>
+                        <NavLink to="/dashboard/charity-profile" className={navLinkClass}>
+                            <FaRegUser className="inline mr-2 text-lg" />
+                            Charity Profile
+                        </NavLink>
+
+                        <NavLink to="/dashboard/my-requests" className={navLinkClass}>
+                            <FaRegHandshake className="inline mr-2 text-lg" />
+                            My Requests
+                        </NavLink>
+
+                        <NavLink to="/dashboard/my-pickups" className={navLinkClass}>
+                            <FaBoxOpen className="inline mr-2 text-lg" />
+                            My Pickups
+                        </NavLink>
+
+                        <NavLink to="/dashboard/received-donations" className={navLinkClass}>
+                            <FaGift className="inline mr-2 text-lg" />
+                            Received Donations
+                        </NavLink>
+                    </>
+                    
+                    }
+
+                  
+
                 </ul>
             </div>
         </div>

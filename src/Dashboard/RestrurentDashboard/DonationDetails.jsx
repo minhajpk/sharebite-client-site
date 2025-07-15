@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 import useAxiosSecure from '../../Hooks/axiosSecure';
 import { AuthContext } from '../../Context/AuthContext';
 import Swal from 'sweetalert2';
+import RequestModal from './RequestModal';
 
 
 
@@ -14,49 +15,51 @@ const DonationDetails = () => {
     const axiosSecure = useAxiosSecure();
     const queryClient = useQueryClient();
     const { user } = use(AuthContext);
+
     const [showRequestModal, setShowRequestModal] = useState(false);
-    // const [showReviewModal, setShowReviewModal] = useState(false);
     const [reviewName, setReviewName] = useState(user?.name || '');
     const [comment, setComment] = useState('');
     const [rating, setRating] = useState(5);
 
-  
+    console.log('User:', user);
+    
 
-const reviewMutation = useMutation({
-  mutationFn: async () => {
-    return await axiosSecure.post(`/reviews/${id}`, {
-      name: reviewName,
-      comment,
-      rating: parseInt(rating),
+
+    const reviewMutation = useMutation({
+        mutationFn: async () => {
+            return await axiosSecure.post(`/reviews/${id}`, {
+                name: reviewName,
+                comment,
+                rating: parseInt(rating),
+            });
+
+        },
+        onSuccess: () => {
+            Swal.fire({
+                title: 'Success!',
+                text: 'Review submitted successfully.',
+                icon: 'success',
+                confirmButtonText: 'OK',
+                timer: 2500,
+                timerProgressBar: true,
+            });
+
+            queryClient.invalidateQueries(['reviews', id]);
+
+            document.getElementById('review_modal').close();
+
+            setComment('');
+            setRating(5);
+        },
+        onError: () => {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Failed to submit review.',
+                icon: 'error',
+                confirmButtonText: 'OK',
+            });
+        }
     });
-     
-  },
-  onSuccess: () => {
-    Swal.fire({
-      title: 'Success!',
-      text: 'Review submitted successfully.',
-      icon: 'success',
-      confirmButtonText: 'OK',
-      timer: 2500,
-      timerProgressBar: true,
-    });
-
-    queryClient.invalidateQueries(['reviews', id]);
-
-    document.getElementById('review_modal').close();
-
-    setComment('');
-    setRating(5);
-  },
-  onError: () => {
-    Swal.fire({
-      title: 'Error!',
-      text: 'Failed to submit review.',
-      icon: 'error',
-      confirmButtonText: 'OK',
-    });
-  }
-});
 
 
     const { data: donation, isLoading, isError } = useQuery({
@@ -66,16 +69,26 @@ const reviewMutation = useMutation({
             return res.data;
         }
     });
-
-
-
-   const { data: reviews = [] } = useQuery({
-  queryKey: ['reviews', id],
+    
+   const { data: users = [] } = useQuery({
+  queryKey: ['users'],
   queryFn: async () => {
-    const res = await axiosSecure.get(`/reviews/${id}`);
+    const res = await axiosSecure.get('/users');
     return res.data;
   }
 });
+const currentUser = users.find(u => u.email === user?.email);
+
+console.log('User role:', currentUser?.role)
+
+
+    const { data: reviews = [] } = useQuery({
+        queryKey: ['reviews', id],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/reviews/${id}`);
+            return res.data;
+        }
+    });
 
     const favoriteMutation = useMutation({
         mutationFn: async () => {
@@ -121,16 +134,32 @@ const reviewMutation = useMutation({
 
             <div className="flex gap-4 mt-4">
                 <button onClick={handleSaveToFavorites} className="btn btn-outline btn-sm">Save to Favorites</button>
-                {user?.role === 'charity' && donation.status === 'Available' && (
-                    <button onClick={() => setShowRequestModal(true)} className="btn btn-primary btn-sm">Request Donation</button>
-                )}
+
                 {user?.role === 'charity' && donation.status === 'Accepted' && (
                     <button onClick={handleConfirmPickup} className="btn btn-success btn-sm">Confirm Pickup</button>
                 )}
             </div>
 
             {/* Request Modal */}
-            {showRequestModal && <RequestModal donation={donation} user={user} closeModal={() => setShowRequestModal(false)} />}
+            {currentUser?.role === 'charity' && donation.status === 'Available' && (
+                <button
+                    className="btn btn-primary btn-sm mt-5"
+                    onClick={() => setShowRequestModal(true)}
+                >
+                    Request Donation
+                </button>
+            )}
+
+            {showRequestModal && (
+                <RequestModal
+                    donation={donation}
+                    user={user}
+                    closeModal={() => setShowRequestModal(false)}
+                />
+            )}
+
+
+
 
             {/* Review Section */}
             <div className="mt-10 space-y-4">
