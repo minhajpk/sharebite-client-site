@@ -20,9 +20,10 @@ const DonationDetails = () => {
     const [reviewName, setReviewName] = useState(user?.name || '');
     const [comment, setComment] = useState('');
     const [rating, setRating] = useState(5);
+    const [requesterEmail, setRequesterEmail] = useState(5);
 
     console.log('User:', user);
-    
+
 
 
     const reviewMutation = useMutation({
@@ -31,6 +32,7 @@ const DonationDetails = () => {
                 name: reviewName,
                 comment,
                 rating: parseInt(rating),
+                requesterEmail: user.email,
             });
 
         },
@@ -69,18 +71,15 @@ const DonationDetails = () => {
             return res.data;
         }
     });
-    
-   const { data: users = [] } = useQuery({
-  queryKey: ['users'],
-  queryFn: async () => {
-    const res = await axiosSecure.get('/users');
-    return res.data;
-  }
-});
-const currentUser = users.find(u => u.email === user?.email);
 
-console.log('User role:', currentUser?.role)
-
+    const { data: users = [] } = useQuery({
+        queryKey: ['users'],
+        queryFn: async () => {
+            const res = await axiosSecure.get('/users');
+            return res.data;
+        }
+    });
+    const currentUser = users.find(u => u.email === user?.email);
 
     const { data: reviews = [] } = useQuery({
         queryKey: ['reviews', id],
@@ -196,11 +195,26 @@ console.log('User role:', currentUser?.role)
                                 <input
                                     type="text"
                                     className="input input-bordered w-full"
-                                    value={reviewName}
+                                    placeholder='Enter Your Name'
+                                     value={user?.displayName || ""}
                                     onChange={(e) => setReviewName(e.target.value)}
                                     required
                                 />
                             </div>
+                            <div>
+                                <label className="label">
+                                    <span className="label-text">Your Email</span>
+                                </label>
+                                <input
+                                    type="email"
+                                    className="input input-bordered w-full"
+                                    placeholder='Enter Your Email'
+                                     value={user?.email || ""}
+                                    onChange={(e) => setRequesterEmail(e.target.value)} 
+                                    required
+                                />
+                            </div>
+
 
                             <div>
                                 <label className="label">
@@ -231,12 +245,12 @@ console.log('User role:', currentUser?.role)
                             </div>
 
                             <div className="modal-action">
-                                <button type="submit" className="btn btn-primary" disabled={reviewMutation.isLoading}>
+                                <button type="submit"  className="bg-[#0e606e] btn  text-white hover:scale-105 transition duration-300 hover:bg-[#0e606e]" disabled={reviewMutation.isLoading}>
                                     {reviewMutation.isLoading ? 'Submitting...' : 'Submit'}
                                 </button>
                                 <button
                                     type="button"
-                                    className="btn"
+                                   className="bg-red-600 btn  text-white hover:scale-105 transition duration-300 hover:bg-red-700"
                                     onClick={() => document.getElementById('review_modal').close()}
                                 >
                                     Cancel

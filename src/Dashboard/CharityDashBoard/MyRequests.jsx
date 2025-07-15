@@ -15,7 +15,7 @@ const MyRequests = () => {
   const { data: requests = [], isLoading } = useQuery({
     queryKey: ['my-requests', user.email],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/requests?email=${user.email}`);
+      const res = await axiosSecure.get(`/request_donations?email=${user.email}`);
       return res.data;
     }
   });
@@ -23,7 +23,7 @@ const MyRequests = () => {
   // Cancel request mutation
   const cancelMutation = useMutation({
     mutationFn: async (id) => {
-      return await axiosSecure.delete(`/requests/${id}`);
+      return await axiosSecure.delete(`/request_donations/${id}`);
     },
     onSuccess: () => {
       toast.success('Request canceled');
@@ -57,6 +57,7 @@ const MyRequests = () => {
         requests.map((req) => (
           <div key={req._id} className="card bg-base-100 shadow-sm w-full">
             <div className="card-body">
+                <img src={req.donationImage} alt="" />
               <h2 className="card-title">{req.donationTitle}</h2>
               <p><strong>Restaurant:</strong> {req.restaurantName}</p>
               <p><strong>Type:</strong> {req.foodType}</p>

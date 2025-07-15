@@ -1,25 +1,28 @@
 import React from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import useAxiosSecure from '../../Hooks/axiosSecure';
+
 import { toast } from 'react-hot-toast';
+import useAxiosSecure from '../../Hooks/axiosSecure';
 
 const ManageDonations = () => {
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
 
   // Fetch all donations
- const { data: donations = [] } = useQuery({
-  queryKey: ['donations'],
-  queryFn: async () => {
-    const res = await axiosSecure.get('/donations');
-    return res.data;
-  },
-});
+  const { data: donations = [], isLoading } = useQuery({
+    queryKey: ['donations'],
+    queryFn: async () => {
+      const res = await axiosSecure.get('/donations');
+      return res.data;
+    },
+  });
 
-  // Mutation for verifying donation
+  // Verify donation
   const verifyMutation = useMutation({
     mutationFn: async (id) => {
-      return await axiosSecure.patch(`/donations/${id}/verify`);
+      return await axiosSecure.patch(`/donations/${id}/verify`, {
+        status: 'Available',
+      });
     },
     onSuccess: () => {
       toast.success('Donation verified!');
@@ -27,10 +30,12 @@ const ManageDonations = () => {
     },
   });
 
-  // Mutation for rejecting donation
+  // Reject donation
   const rejectMutation = useMutation({
     mutationFn: async (id) => {
-      return await axiosSecure.patch(`/donations/${id}/reject`);
+      return await axiosSecure.patch(`/donations/${id}/reject`, {
+        status: 'Rejected',
+      });
     },
     onSuccess: () => {
       toast.error('Donation rejected!');
@@ -38,7 +43,7 @@ const ManageDonations = () => {
     },
   });
 
-//   if (isLoading) return <p className="text-center">Loading donations...</p>;
+  if (isLoading) return <p className="text-center">Loading donations...</p>;
 
   return (
     <div className="p-6 max-w-7xl mx-auto">
@@ -60,19 +65,20 @@ const ManageDonations = () => {
           <tbody>
             {donations.map((donation, index) => (
               <tr key={donation._id}>
-                <th>{index + 1}</th>
+                <td>{index + 1}</td>
                 <td>{donation.title}</td>
                 <td>{donation.type}</td>
                 <td>{donation.restaurantName}</td>
                 <td>{donation.restaurantEmail}</td>
                 <td>{donation.quantity}</td>
                 <td>
-                  <span className={`badge ${donation.status === 'Pending'
-                    ? 'badge-warning'
-                    : donation.status === 'Available'
-                    ? 'badge-success'
-                    : 'badge-error'
-                  }`}>
+                  <span className={`badge 
+                    ${donation.status === 'Pending'
+                      ? 'badge-warning'
+                      : donation.status === 'Verified'
+                      ? 'badge-success'
+                      : 'badge-error'
+                    }`}>
                     {donation.status}
                   </span>
                 </td>
@@ -80,14 +86,14 @@ const ManageDonations = () => {
                   {donation.status === 'Pending' && (
                     <>
                       <button
-                        onClick={() => verifyMutation.mutate(donation._id)}
                         className="btn btn-sm btn-success"
+                        onClick={() => verifyMutation.mutate(donation._id)}
                       >
                         Verify
                       </button>
                       <button
-                        onClick={() => rejectMutation.mutate(donation._id)}
                         className="btn btn-sm btn-error"
+                        onClick={() => rejectMutation.mutate(donation._id)}
                       >
                         Reject
                       </button>

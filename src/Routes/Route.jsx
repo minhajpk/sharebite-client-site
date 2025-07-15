@@ -25,6 +25,10 @@ import DonationDetails from "../Dashboard/RestrurentDashboard/DonationDetails";
 import CharityProfile from "../Dashboard/CharityDashBoard/CharityProfile";
 import MyRequests from "../Dashboard/CharityDashBoard/MyRequests";
 import ManageDonations from "../Dashboard/AdminDashboard.jsx/ManageDonation";
+import MyReviews from "../Dashboard/userDashboard/MyReviews";
+import ManageRequests from "../Dashboard/AdminDashboard.jsx/ManageRequests";
+import FeaturedDonations2 from "../Dashboard/AdminDashboard.jsx/FeatureDonations2";
+import RequestedDonations from "../Dashboard/RestrurentDashboard/RequestedDonations";
 
 
 
@@ -77,6 +81,10 @@ export const router = createBrowserRouter([
                 Component: TransactionHistory
             },
             {
+                path:"my-reviews",
+                Component: MyReviews
+            },
+            {
                 path: 'manage-user',
                 element: <AdminRoute><ManagerUser></ManagerUser></AdminRoute>
             },
@@ -94,6 +102,14 @@ export const router = createBrowserRouter([
                 path: 'manage-donations',
                 element: <AdminRoute><ManageDonations></ManageDonations></AdminRoute>
             },
+            {
+                path:'manage-requests',
+                Component: ManageRequests
+            },
+            {
+                path:'feature-donations',
+                Component: FeaturedDonations2
+            },
 
             // Restaurant Dashboard
             {
@@ -107,6 +123,11 @@ export const router = createBrowserRouter([
             {
                 path: 'my-donations',
                 Component: MyDonations
+            },
+            {
+                path:'requested-donations',
+                Component: RequestedDonations
+
             },
 
             // Charity Dashboard
