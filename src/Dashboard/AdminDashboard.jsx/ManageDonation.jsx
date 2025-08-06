@@ -46,7 +46,7 @@ const ManageDonations = () => {
   if (isLoading) return <p className="text-center">Loading donations...</p>;
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
+    <div className="p-6 max-w-7xl">
       <h2 className="text-2xl font-bold mb-4">Manage Donations</h2>
       <div className="overflow-x-auto">
         <table className="table table-zebra w-full">

@@ -97,14 +97,14 @@ const MyDonations = () => {
                                 <div className="space-x-5 mt-4">
                                     {donation.status !== 'Rejected' && (
                                         <button
-                                            className="btn btn-sm btn-info"
+                                            className="btn bg-[#0e606e] text-white hover:bg-[#0e606e]/90"
                                             onClick={() => handleUpdate(donation)}
                                         >
                                             Update
                                         </button>
                                     )}
                                     <button
-                                        className="btn btn-sm btn-error"
+                                        className="btn  bg-red-700 text-white"
                                         onClick={() => handleDelete(donation._id)}
                                     >
                                         Delete

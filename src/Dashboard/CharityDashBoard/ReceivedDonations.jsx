@@ -66,10 +66,11 @@ const ReceivedDonations = () => {
       {filteredDonations.length ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {filteredDonations.map((donation) => (
+            
             <div key={donation._id} className="border p-4 rounded shadow">
               <h3 className="text-xl font-semibold mb-2">{donation.donationTitle}</h3>
               <p><strong>Restaurant:</strong> {donation.restaurantName}</p>
-              <p><strong>Food Type:</strong> {donation.foodType || 'N/A'}</p>
+              <p><strong>Food Type:</strong> {donation.type || 'N/A'}</p>
               <p><strong>Quantity:</strong> {donation.quantity}</p>
               <p><strong>Pickup Date:</strong> {new Date(donation.pickupTime).toLocaleString()}</p>
               <button
@@ -82,8 +83,10 @@ const ReceivedDonations = () => {
                 Review
               </button>
             </div>
+            
           ))}
         </div>
+        
       ) : (
         <p>No donations received yet.</p>
       )}

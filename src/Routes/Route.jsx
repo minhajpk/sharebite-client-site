@@ -34,6 +34,8 @@ import MyPickups from "../Dashboard/CharityDashBoard/MyPickups";
 import ReceivedDonations from "../Dashboard/CharityDashBoard/ReceivedDonations";
 import ErrorPage from "../Pages/Errorpage";
 import ForbiddenPage from "../Pages/ForbiddenPage";
+import DonationStatistics from "../Pages/DonationStatistics";
+import UpdateDonation from "../Dashboard/RestrurentDashboard/UpdateDonation";
 
 
 
@@ -68,13 +70,18 @@ export const router = createBrowserRouter([
             {
                 path:'/forbidden',
                 Component:ForbiddenPage
-            }
+            },
+           
         ]
     },
     {
         path: "/dashboard",
         element: <PrivateRoute><DashboardLayout></DashboardLayout> </PrivateRoute>,
         children: [
+            {
+                path:"home",
+                Component: DashboardLayout
+            },
             {
                 path: "request-charity-role",
                 Component: RequestCharityRole
@@ -99,6 +106,10 @@ export const router = createBrowserRouter([
                 path: 'favorite',
                 Component: Favorites
             },
+            {
+                path:'restaurant/statistics',
+                Component: DonationStatistics
+            },
 
             // Admin dashboard route
             {
@@ -120,48 +131,53 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'manage-requests',
-                Component: ManageRequests
+                element:<AdminRoute><ManageDonations></ManageDonations></AdminRoute>
             },
             {
                 path: 'feature-donations',
-                Component: FeaturedDonations2
+                element:<AdminRoute><FeaturedDonations2></FeaturedDonations2></AdminRoute>
             },
 
             // Restaurant Dashboard
             {
                 path: 'restaurant-profile',
-                Component: RestaurantProfile
+               element: <RestaurantRoute><RestaurantProfile></RestaurantProfile></RestaurantRoute>
             },
             {
                 path: 'add-donation',
-                Component: AddDonation
+                element:<RestaurantRoute><AddDonation></AddDonation></RestaurantRoute>
             },
             {
                 path: 'my-donations',
-                Component: MyDonations
+                element: <RestaurantRoute><MyDonations></MyDonations></RestaurantRoute>
             },
             {
                 path: 'requested-donations',
-                Component: RequestedDonations
+                element:<RestaurantRoute><RequestedDonations></RequestedDonations></RestaurantRoute>
+
+            },
+            {
+                path:"update-donation/:id",
+                Component: UpdateDonation
 
             },
 
             // Charity Dashboard
             {
                 path: 'charity-profile',
-                Component: CharityProfile
+                element:<charityRoute><CharityProfile></CharityProfile></charityRoute>
             },
             {
                 path: 'my-requests',
-                Component: MyRequests
+                element:<charityRoute><MyRequests></MyRequests></charityRoute>
             },
             {
                 path:'my-pickups',
-                Component: MyPickups
+                element:<charityRoute><MyPickups></MyPickups></charityRoute>
             },
             {
                 path:'received-donations',
-                Component: ReceivedDonations
+               element: <charityRoute><ReceivedDonations></ReceivedDonations></charityRoute>
             }
 
         ]

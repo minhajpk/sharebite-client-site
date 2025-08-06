@@ -8,6 +8,8 @@ import RequestModal from './RequestModal';
 
 const DonationDetails = () => {
     const { id } = useParams();
+    localStorage.setItem('id', id)
+    console.log(id)
     const axiosSecure = useAxiosSecure();
     const queryClient = useQueryClient();
     const { user } = use(AuthContext);
@@ -69,7 +71,7 @@ const DonationDetails = () => {
     const reviewMutation = useMutation({
         mutationFn: async () => {
             const reviewData = {
-                donationId: id,
+                donationId: localStorage.getItem('id'),
                 donationTitle: donation.title,
                 restaurantName: donation.restaurantName,
                 name: reviewName,

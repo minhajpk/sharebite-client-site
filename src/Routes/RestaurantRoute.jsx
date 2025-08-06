@@ -1,6 +1,4 @@
 import React, { Children, use } from 'react';
-
-
 import { Navigate } from 'react-router';
 import { AuthContext } from '../Context/AuthContext';
 import useUserRole from '../Hooks/useUserRole';
@@ -13,7 +11,7 @@ const RestaurantRoute = ({ children }) => {
         return <span className="loading loading-spinner loading-xl"></span>
     }
 
-    if (!user || role !== 'Restaurant') {
+    if (!user || role !== 'restaurant') {
         return <Navigate state={{ from: location.pathname }} to="/forbidden"></Navigate>
     }
 
@@ -21,3 +19,4 @@ const RestaurantRoute = ({ children }) => {
 };
 
 export default RestaurantRoute;
+

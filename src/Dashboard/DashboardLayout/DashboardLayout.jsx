@@ -1,16 +1,20 @@
 import React from 'react';
 import { NavLink, Outlet } from 'react-router';
 import LogoD from '../../assets/Sharebite Logo.png';
+
 import {
     HiOutlineHome,
     HiOutlineUser,
     HiOutlineClipboardList,
     HiOutlineHeart,
     HiOutlinePencilAlt,
-    HiOutlineCurrencyDollar
+    HiOutlineCurrencyDollar,
+    HiOutlineChartSquareBar
 } from 'react-icons/hi';
-import { FaBoxOpen, FaClipboardList, FaGift, FaHandsHelping, FaHistory, FaListAlt, FaPlus, FaRegHandshake, FaRegUser, FaStar, FaUserCheck, FaUsersCog, FaUtensils } from 'react-icons/fa';
+import { FaBoxOpen, FaClipboardList, FaCloud, FaGift, FaHandsHelping, FaHistory, FaLeaf, FaListAlt, FaPlus, FaRegHandshake, FaRegUser, FaStar, FaUserCheck, FaUsersCog, FaUtensils } from 'react-icons/fa';
 import useUserRole from '../../Hooks/useUserRole';
+import ImpactStats from '../../Component/ExtraSections/ImpactStats';
+import CountUp from 'react-countup';
 
 const navLinkClass = ({ isActive }) =>
     isActive
@@ -40,6 +44,7 @@ const DashboardLayout = () => {
                 </div>
 
                 <div className="p-4">
+                    
                     <Outlet />
                 </div>
             </div>
@@ -134,36 +139,42 @@ const DashboardLayout = () => {
                                     <FaRegHandshake className="inline mr-2 text-lg" />
                                     Requested Donations
                                 </NavLink>
+                                <NavLink to="/dashboard/restaurant/statistics" className={navLinkClass}>
+                                    <HiOutlineChartSquareBar className="inline mr-2 text-lg" />
+                                    Restaurant Statistics
+                                </NavLink>
                             </div>
                         </>
+
+
                     }
                     {!roleLoading && role === 'charity' &&
-                    
-                      <>
-                        <NavLink to="/dashboard/charity-profile" className={navLinkClass}>
-                            <FaRegUser className="inline mr-2 text-lg" />
-                            Charity Profile
-                        </NavLink>
 
-                        <NavLink to="/dashboard/my-requests" className={navLinkClass}>
-                            <FaRegHandshake className="inline mr-2 text-lg" />
-                            My Requests
-                        </NavLink>
+                        <>
+                            <NavLink to="/dashboard/charity-profile" className={navLinkClass}>
+                                <FaRegUser className="inline mr-2 text-lg" />
+                                Charity Profile
+                            </NavLink>
 
-                        <NavLink to="/dashboard/my-pickups" className={navLinkClass}>
-                            <FaBoxOpen className="inline mr-2 text-lg" />
-                            My Pickups
-                        </NavLink>
+                            <NavLink to="/dashboard/my-requests" className={navLinkClass}>
+                                <FaRegHandshake className="inline mr-2 text-lg" />
+                                My Requests
+                            </NavLink>
 
-                        <NavLink to="/dashboard/received-donations" className={navLinkClass}>
-                            <FaGift className="inline mr-2 text-lg" />
-                            Received Donations
-                        </NavLink>
-                    </>
-                    
+                            <NavLink to="/dashboard/my-pickups" className={navLinkClass}>
+                                <FaBoxOpen className="inline mr-2 text-lg" />
+                                My Pickups
+                            </NavLink>
+
+                            <NavLink to="/dashboard/received-donations" className={navLinkClass}>
+                                <FaGift className="inline mr-2 text-lg" />
+                                Received Donations
+                            </NavLink>
+                        </>
+
                     }
 
-                  
+
 
                 </ul>
             </div>
