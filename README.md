@@ -75,5 +75,5 @@ npm start
 ```
 
 ## 🔗 Live Website
-👉 [Visit BlogNest](https://sharebite-85e8d.web.app/))
+👉 [Visit ShareBite](https://sharebite-85e8d.web.app/))
 
