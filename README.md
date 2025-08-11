@@ -72,7 +72,8 @@ REACT_APP_appId=your_app_id
 
 # 5. Run the development server
 npm start
----
-🔗 Live Website
-👉 Visit ShareBite: https://sharebite.example.com
+```
+
+## 🔗 Live Website
+👉 [Visit BlogNest](https://blog-nest-a9329.web.app/)
 
