@@ -72,6 +72,7 @@ REACT_APP_appId=your_app_id
 
 # 5. Run the development server
 npm start
+---
 🔗 Live Website
 👉 Visit ShareBite: https://sharebite.example.com
 
